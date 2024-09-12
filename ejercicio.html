@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tareas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        #taskContainer {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        #taskInput {
+            width: calc(100% - 120px);
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        #addTaskButton {
+            width: 100px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        #addTaskButton:hover {
+            background-color: #218838;
+        }
+        #taskList {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        #taskList li {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            margin-bottom: 10px;
+        }
+        .task-text {
+            flex: 1;
+        }
+        .removeTaskButton {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .removeTaskButton:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div id="taskContainer">
+        <h1>Lista de Tareas</h1>
+        <input type="text" id="taskInput" placeholder="Introduce una nueva tarea">
+        <button id="addTaskButton" onclick="addTask()">Añadir Tarea</button>
+        
+        <ul id="taskList">
+        </ul>
+    </div>
+
+    <script>
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const taskText = taskInput.value.trim();
+            if (taskText === '') {
+                alert('Por favor, introduce una tarea.');
+                return;
+            }
+
+            const taskList = document.getElementById('taskList');
+            const taskItem = document.createElement('li');
+            taskItem.innerHTML = `
+                <span class="task-text">${taskText}</span>
+                <button class="removeTaskButton" onclick="removeTask(this)">Eliminar</button>
+            `;
+            taskList.appendChild(taskItem);
+
+            taskInput.value = ''; // Limpiar el campo de entrada
+        }
+
+        function removeTask(button) {
+            const taskItem = button.parentElement;
+            taskItem.remove();
+        }
+    </script>
+</body>
+</html>
